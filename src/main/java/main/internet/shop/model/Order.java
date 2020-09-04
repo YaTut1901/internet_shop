@@ -1,16 +1,17 @@
-package main.internet.shop.models;
+package main.internet.shop.model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ShoppingCart {
+public class Order {
     private Long id;
     private List<Product> products;
     private Long userId;
 
-    public ShoppingCart(Long id, List<Product> products, Long userId) {
+    public Order(Long id, Long userId) {
         this.id = id;
-        this.products = products;
+        products = new ArrayList<>();
         this.userId = userId;
     }
 
@@ -40,12 +41,16 @@ public class ShoppingCart {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ShoppingCart that = (ShoppingCart) o;
-        return Objects.equals(id, that.id) &&
-                Objects.equals(products, that.products) &&
-                Objects.equals(userId, that.userId);
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Order order = (Order) o;
+        return Objects.equals(id, order.id)
+                && Objects.equals(products, order.products)
+                && Objects.equals(userId, order.userId);
     }
 
     @Override
@@ -55,10 +60,13 @@ public class ShoppingCart {
 
     @Override
     public String toString() {
-        return "ShoppingCart{" +
-                "id=" + id +
-                ", products=" + products +
-                ", userId=" + userId +
-                '}';
+        return "Order{"
+                + "id="
+                + id
+                + ", products="
+                + products
+                + ", userId="
+                + userId
+                + '}';
     }
 }

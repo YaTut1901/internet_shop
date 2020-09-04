@@ -1,11 +1,11 @@
 package main.internet.shop;
 
 import main.internet.shop.lib.Injector;
-import main.internet.shop.models.Product;
+import main.internet.shop.model.Product;
 import main.internet.shop.service.ProductService;
 
 public class Application {
-    private static Injector injector =Injector.getInstance("main.internet.shop");
+    private static Injector injector = Injector.getInstance("main.internet.shop");
 
     public static void main(String[] args) {
         ProductService productService = (ProductService) injector.getInstance(ProductService.class);

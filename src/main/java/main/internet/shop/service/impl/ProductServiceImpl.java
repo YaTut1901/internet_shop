@@ -1,17 +1,17 @@
-package main.internet.shop.service;
-
-import main.internet.shop.dao.ProductDao;
-import main.internet.shop.lib.Inject;
-import main.internet.shop.lib.Service;
-import main.internet.shop.models.Product;
+package main.internet.shop.service.impl;
 
 import java.util.List;
 import java.util.Optional;
+import main.internet.shop.dao.ProductDao;
+import main.internet.shop.lib.Inject;
+import main.internet.shop.lib.Service;
+import main.internet.shop.model.Product;
+import main.internet.shop.service.ProductService;
 
 @Service
 public class ProductServiceImpl implements ProductService {
     @Inject
-    ProductDao productDao;
+    private ProductDao productDao;
 
     @Override
     public Product create(Product product) {
@@ -35,6 +35,6 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public boolean delete(Long id) {
-        return productDao.delete(id);
+        return productDao.deleteById(id);
     }
 }

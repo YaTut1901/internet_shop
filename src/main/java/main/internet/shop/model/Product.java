@@ -1,4 +1,4 @@
-package main.internet.shop.models;
+package main.internet.shop.model;
 
 import java.util.Objects;
 
@@ -38,12 +38,16 @@ public class Product {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Product product = (Product) o;
-        return Objects.equals(id, product.id) &&
-                Objects.equals(name, product.name) &&
-                Objects.equals(price, product.price);
+        return Objects.equals(id, product.id)
+                && Objects.equals(name, product.name)
+                && Objects.equals(price, product.price);
     }
 
     @Override
@@ -53,10 +57,10 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", price=" + price +
-                '}';
+        return "Product{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", price=" + price
+                + '}';
     }
 }

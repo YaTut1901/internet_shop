@@ -1,9 +1,8 @@
 package main.internet.shop.service;
 
-import main.internet.shop.models.Product;
-
 import java.util.List;
 import java.util.Optional;
+import main.internet.shop.model.Product;
 
 public interface ProductService {
     Product create(Product product);
