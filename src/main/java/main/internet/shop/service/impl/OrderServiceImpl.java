@@ -1,7 +1,6 @@
 package main.internet.shop.service.impl;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import main.internet.shop.dao.OrderDao;
 import main.internet.shop.lib.Inject;
 import main.internet.shop.lib.Service;
@@ -29,9 +28,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getUserOrders(Long userId) {
-        return orderDao.getAll().stream()
-                .filter(order -> order.getUserId().equals(userId))
-                .collect(Collectors.toList());
+        return orderDao.getUserOrders(userId);
     }
 
     @Override
@@ -46,6 +43,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public boolean delete(Long id) {
-        return orderDao.delete(get(id));
+        return orderDao.deleteById(id);
     }
 }

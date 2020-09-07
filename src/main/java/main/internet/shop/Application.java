@@ -35,6 +35,7 @@ public class Application {
         for (Product product : productService.getAll()) {
             System.out.println(product);
         }
+
         UserService userService = (UserService) injector.getInstance(UserService.class);
         User firstUser = new User("John", "john123", "qwerty");
         userService.create(firstUser);
@@ -56,6 +57,7 @@ public class Application {
         userService.update(tempUser);
         System.out.println("Updating 3 user");
         System.out.println(userService.get(3L));
+
         ShoppingCartService shoppingCartService =
                 (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
         ShoppingCart firstCart = new ShoppingCart(3L);
@@ -79,6 +81,7 @@ public class Application {
         shoppingCartService.clear(firstCart);
         System.out.println("Cleaning firstCart");
         System.out.println(firstCart);
+
         OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
         Order firstOrder = new Order(3L);
         Order secondOrder = new Order(2L);

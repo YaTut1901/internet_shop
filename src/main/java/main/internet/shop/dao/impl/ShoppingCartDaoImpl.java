@@ -29,6 +29,14 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
+    public ShoppingCart getByUserId(Long userId) {
+        return Storage.carts.stream()
+                .filter(cart -> cart.getUserId().equals(userId))
+                .findFirst()
+                .orElseThrow();
+    }
+
+    @Override
     public ShoppingCart update(ShoppingCart cart) {
         IntStream.range(0, Storage.carts.size())
                 .filter(index -> Storage.carts.get(index).getId().equals(cart.getId()))
