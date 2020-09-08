@@ -22,4 +22,19 @@ public class Storage {
         product.setId(++productId);
         products.add(product);
     }
+
+    public static void addOrder(Order order) {
+        order.setId(++orderId);
+        orders.add(order);
+    }
+
+    public static void addShoppingCart(ShoppingCart cart) {
+        cart.setId(++cartId);
+        carts.add(cart);
+    }
+
+    public static void addUser(User user) {
+        user.setId(++userId);
+        users.add(user);
+    }
 }
