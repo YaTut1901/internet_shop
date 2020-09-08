@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import main.internet.shop.model.ShoppingCart;
 
-public interface ShoppingCartDao {
+public interface ShoppingCartDao extends GenericDao<ShoppingCart, Long> {
     ShoppingCart create(ShoppingCart cart);
 
     Optional<ShoppingCart> get(Long id);

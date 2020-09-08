@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import main.internet.shop.model.User;
 
-public interface UserDao {
+public interface UserDao extends GenericDao<User, Long> {
     User create(User user);
 
     Optional<User> get(Long id);
