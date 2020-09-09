@@ -1,9 +1,20 @@
 package main.internet.shop.dao;
 
-import java.util.List;
 import main.internet.shop.model.Order;
 
-public interface OrderDao extends GenericDao<Order, Long> {
+import java.util.List;
+import java.util.Optional;
 
-    List<Order> getUserOrders(Long userId);
+public interface OrderDao {
+    Order create(Order order);
+
+    Optional<Order> get(Long id);
+
+    List<Order> getAll();
+
+    Order update(Order id);
+
+    boolean deleteById(Long id);
+
+    boolean delete(Order order);
 }
