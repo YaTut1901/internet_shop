@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import main.internet.shop.model.Product;
 
-public interface ProductDao extends GenericDao<Product, Long> {
+public interface ProductDao {
     Product create(Product product);
 
     Optional<Product> get(Long id);

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import main.internet.shop.model.Order;
 
-public interface OrderDao extends GenericDao<Order, Long> {
+public interface OrderDao {
     Order create(Order order);
 
     Optional<Order> get(Long id);
