@@ -7,8 +7,8 @@
 <body>
 <h1>Product addition</h1>
 <form method="post" action="${pageContext.request.contextPath}/product/add">
-    name: <input type="text" name="product_name"> <br/>
-    price: <input type="number" name="product_price"> <br/>
+    name: <input type="text" name="productName"> <br/>
+    price: <input type="number" name="productPrice"> <br/>
     <button type="submit">Add</button>
 </form>
 </body>

@@ -17,14 +17,8 @@ public class UserDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/user/delete.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        String login = req.getParameter("login");
-        userService.deleteByLogin(login);
+        Long id = Long.parseLong(req.getParameter("id"));
+        userService.delete(id);
         resp.sendRedirect(req.getContextPath() + "/user/all");
     }
 }

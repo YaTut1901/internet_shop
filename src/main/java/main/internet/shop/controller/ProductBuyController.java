@@ -27,7 +27,7 @@ public class ProductBuyController extends HttpServlet {
         Long id = Long.parseLong(req.getParameter("productId"));
         Product productToBuy = productService.get(id);
         ShoppingCart userCart = shoppingCartService.getByUserId(TEMP_USER_ID);
-        userCart.getProducts().add(productToBuy);
+        shoppingCartService.addProduct(userCart, productToBuy);
         req.getRequestDispatcher("/WEB-INF/views/product/success-buying.jsp").forward(req, resp);
     }
 }

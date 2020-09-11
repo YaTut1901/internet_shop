@@ -24,8 +24,8 @@ public class ProductAddController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        String name = req.getParameter("product_name");
-        Double price = Double.parseDouble(req.getParameter("product_price"));
+        String name = req.getParameter("productName");
+        Double price = Double.parseDouble(req.getParameter("productPrice"));
         Product product = new Product(name, price);
         productService.create(product);
         resp.sendRedirect(req.getContextPath() + "/product/all");

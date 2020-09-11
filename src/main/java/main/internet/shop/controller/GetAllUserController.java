@@ -10,7 +10,7 @@ import main.internet.shop.lib.Injector;
 import main.internet.shop.model.User;
 import main.internet.shop.service.UserService;
 
-public class UserController extends HttpServlet {
+public class GetAllUserController extends HttpServlet {
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");
     private UserService userService = (UserService)
@@ -22,11 +22,5 @@ public class UserController extends HttpServlet {
         List<User> allUsers = userService.getAll();
         req.setAttribute("users", allUsers);
         req.getRequestDispatcher("/WEB-INF/views/user/all.jsp").forward(req, resp);
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        resp.sendRedirect(req.getContextPath() + "/user/delete");
     }
 }

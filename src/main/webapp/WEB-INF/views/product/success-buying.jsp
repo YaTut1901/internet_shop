@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>BUYING SUCCESS!</h1>
-<form method="get" action="${pageContext.request.contextPath}/shopping-cart/cart">
+<form method="get" action="${pageContext.request.contextPath}/shopping-cart/products">
     <button type="submit">Open cart</button>
 </form>
 </body>

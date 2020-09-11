@@ -10,6 +10,7 @@
 <table border="1">
     <tr>
         <th>ID</th>
+        <th>Login</th>
         <th>Name</th>
     </tr>
     <c:forEach var="user" items="${users}">
@@ -18,14 +19,17 @@
                 <c:out value="${user.id}"/>
             </td>
             <td>
+                <c:out value="${user.login}"/>
+            </td>
+            <td>
                 <c:out value="${user.name}"/>
+            </td>
+            <td>
+                <a href = "${pageContext.request.contextPath}/user/delete?id=${user.id}"> Delete </a>
             </td>
         </tr>
     </c:forEach>
 </table>
-<form method="post" action="${pageContext.request.contextPath}/user/all">
-    <button type="submit">Delete user</button> <br/>
-</form>
 <form method="get" action="${pageContext.request.contextPath}/product/all">
     <button type="submit">Products</button>
 </form>

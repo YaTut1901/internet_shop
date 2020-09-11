@@ -6,7 +6,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import main.internet.shop.lib.Injector;
+import main.internet.shop.model.ShoppingCart;
 import main.internet.shop.model.User;
+import main.internet.shop.service.ShoppingCartService;
 import main.internet.shop.service.UserService;
 
 public class RegistrationController extends HttpServlet {
@@ -14,6 +16,8 @@ public class RegistrationController extends HttpServlet {
             Injector.getInstance("main.internet.shop");
     private UserService userService = (UserService)
             injector.getInstance(UserService.class);
+    private ShoppingCartService shoppingCartService = (ShoppingCartService)
+            injector.getInstance(ShoppingCartService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -28,9 +32,9 @@ public class RegistrationController extends HttpServlet {
         String password = req.getParameter("pwd");
         String passwordConfirming = req.getParameter("pwd_confirm");
         String name = req.getParameter("name");
-        System.out.println(login + " " + password + " " + passwordConfirming);
         if (password.equals(passwordConfirming)) {
-            userService.create(new User(name, login, password));
+            User user = userService.create(new User(name, login, password));
+            shoppingCartService.create(new ShoppingCart(user.getId()));
             resp.sendRedirect(req.getContextPath() + "/user/all");
         } else {
             req.setAttribute("message", "Wrong confirming!");
