@@ -23,7 +23,6 @@ public class ProductBuyController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        shoppingCartService.create(new ShoppingCart(TEMP_USER_ID));
         Long id = Long.parseLong(req.getParameter("productId"));
         Product productToBuy = productService.get(id);
         ShoppingCart userCart = shoppingCartService.getByUserId(TEMP_USER_ID);

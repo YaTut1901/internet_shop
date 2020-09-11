@@ -5,8 +5,6 @@
 </head>
 <body>
 <h1>Hello world!</h1>
-<form method="post">
-    <button type="submit">Registration</button>
-</form>
+<a href="${pageContext.request.contextPath}/registration" class="button">Registration</a>
 </body>
 </html>

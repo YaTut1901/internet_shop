@@ -60,7 +60,8 @@ public class Application {
         System.out.println("Updating 3 user");
         System.out.println(userService.get(3L));
 
-        ShoppingCartService shoppingCartService = (ShoppingCartService) injector.getInstance(ShoppingCartService.class);
+        ShoppingCartService shoppingCartService = (ShoppingCartService)
+                injector.getInstance(ShoppingCartService.class);
         ShoppingCart firstCart = new ShoppingCart(3L);
         firstCart.getProducts().add(new Product("sword", 34.5));
         shoppingCartService.create(firstCart);
