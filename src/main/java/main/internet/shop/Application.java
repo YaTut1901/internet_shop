@@ -14,7 +14,8 @@ public class Application {
     private static Injector injector = Injector.getInstance("main.internet.shop");
 
     public static void main(String[] args) {
-        ProductService productService = (ProductService) injector.getInstance(ProductService.class);
+        ProductService productService = (ProductService)
+                injector.getInstance(ProductService.class);
         Product axe = new Product("Axe", 23.5);
         productService.create(axe);
         Product spear = new Product("Spear", 21.5);
@@ -36,10 +37,12 @@ public class Application {
             System.out.println(product);
         }
 
-        UserService userService = (UserService) injector.getInstance(UserService.class);
+        UserService userService = (UserService)
+                injector.getInstance(UserService.class);
         User firstUser = new User("John", "john123", "qwerty");
         userService.create(firstUser);
-        User secondUser = new User("Jonathan", "john233", "qwersdty");
+        User secondUser = new User("Jonathan",
+                "john233", "qwersdty");
         userService.create(secondUser);
         for (User user : userService.getAll()) {
             System.out.println(user);
@@ -82,7 +85,8 @@ public class Application {
         System.out.println("Cleaning firstCart");
         System.out.println(firstCart);
 
-        OrderService orderService = (OrderService) injector.getInstance(OrderService.class);
+        OrderService orderService = (OrderService)
+                injector.getInstance(OrderService.class);
         Order firstOrder = new Order(3L);
         Order secondOrder = new Order(2L);
         orderService.create(firstOrder);
