@@ -11,7 +11,7 @@ import main.internet.shop.model.ShoppingCart;
 import main.internet.shop.service.ProductService;
 import main.internet.shop.service.ShoppingCartService;
 
-public class ItemDeleteController extends HttpServlet {
+public class DeleteProductFromCartController extends HttpServlet {
     public static final Long TEMP_USER_ID = 1L;
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");

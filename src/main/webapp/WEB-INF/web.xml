@@ -115,7 +115,7 @@
 
     <servlet>
         <servlet-name>ItemDelete</servlet-name>
-        <servlet-class>main.internet.shop.controller.ItemDeleteController</servlet-class>
+        <servlet-class>main.internet.shop.controller.DeleteProductFromCartController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -125,7 +125,7 @@
 
     <servlet>
         <servlet-name>UserOrders</servlet-name>
-        <servlet-class>main.internet.shop.controller.UserOrderController</servlet-class>
+        <servlet-class>main.internet.shop.controller.UserOrdersController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -155,7 +155,7 @@
 
     <servlet>
         <servlet-name>AllOrders</servlet-name>
-        <servlet-class>main.internet.shop.controller.OrdersAdminController</servlet-class>
+        <servlet-class>main.internet.shop.controller.GetAllOrdersAdminController</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -175,7 +175,7 @@
 
     <servlet>
         <servlet-name>AdminProductService</servlet-name>
-        <servlet-class>main.internet.shop.controller.AdminProductServiceController</servlet-class>
+        <servlet-class>main.internet.shop.controller.GetAllProductAdminController</servlet-class>
     </servlet>
 
     <servlet-mapping>

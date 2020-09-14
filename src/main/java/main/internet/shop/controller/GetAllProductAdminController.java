@@ -10,7 +10,7 @@ import main.internet.shop.lib.Injector;
 import main.internet.shop.model.Product;
 import main.internet.shop.service.ProductService;
 
-public class AdminProductServiceController extends HttpServlet {
+public class GetAllProductAdminController extends HttpServlet {
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");
     private ProductService productService = (ProductService)
