@@ -21,12 +21,13 @@ public class ProductBuyController extends HttpServlet {
             injector.getInstance(ProductService.class);
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Long id = Long.parseLong(req.getParameter("productId"));
-        Product productToBuy = productService.get(id);
-        ShoppingCart userCart = shoppingCartService.getByUserId(TEMP_USER_ID);
-        shoppingCartService.addProduct(userCart, productToBuy);
-        req.getRequestDispatcher("/WEB-INF/views/product/success-buying.jsp").forward(req, resp);
+        Long id = Long.parseLong(req.getParameter("id"));
+        Product product = productService.get(id);
+        ShoppingCart cart = shoppingCartService.getByUserId(TEMP_USER_ID);
+        shoppingCartService.addProduct(cart, product);
+        req.getRequestDispatcher("/WEB-INF/views/product/success-buying.jsp")
+                .forward(req, resp);
     }
 }

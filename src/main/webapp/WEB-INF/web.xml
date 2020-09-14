@@ -82,4 +82,34 @@
         <servlet-name>shoppingCart</servlet-name>
         <url-pattern>/shopping-cart/products</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>entrance</servlet-name>
+        <servlet-class>main.internet.shop.controller.EntranceController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>entrance</servlet-name>
+        <url-pattern>/entrance</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>main-menu</servlet-name>
+        <servlet-class>main.internet.shop.controller.MainMenuController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>main-menu</servlet-name>
+        <url-pattern>/main-menu</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>SuccessBuying</servlet-name>
+        <servlet-class>main.internet.shop.controller.SuccessBuyingController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>SuccessBuying</servlet-name>
+        <url-pattern>/product/success-buying</url-pattern>
+    </servlet-mapping>
 </web-app>

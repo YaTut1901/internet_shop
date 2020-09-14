@@ -4,7 +4,13 @@
     <title>Title</title>
 </head>
 <body>
-<h1>Hello world!</h1>
-<a href="${pageContext.request.contextPath}/registration" class="button">Registration</a>
+<h1>Hello customer!</h1>
+<form action="${pageContext.request.contextPath}/registration">
+    <input type="submit" value="Registration" />
+</form>
+Already have an account? <br /> <br />
+<form action="${pageContext.request.contextPath}/entrance">
+    <input type="submit" value="Enter" />
+</form>
 </body>
 </html>
