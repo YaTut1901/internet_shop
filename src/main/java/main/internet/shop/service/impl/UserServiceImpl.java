@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getByLogin(String login) {
+        return userDao.getByLogin(login).orElseThrow();
+    }
+
+    @Override
     public User update(User user) {
         return userDao.update(user);
     }
@@ -36,4 +41,5 @@ public class UserServiceImpl implements UserService {
     public boolean delete(Long id) {
         return userDao.deleteById(id);
     }
+
 }

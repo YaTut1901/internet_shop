@@ -10,6 +10,8 @@ public interface UserService {
 
     List<User> getAll();
 
+    User getByLogin(String login);
+
     User update(User user);
 
     boolean delete(Long id);
