@@ -2,7 +2,6 @@ package main.internet.shop.service.impl;
 
 import java.util.List;
 import java.util.Optional;
-
 import main.internet.shop.dao.UserDao;
 import main.internet.shop.lib.Inject;
 import main.internet.shop.lib.Service;
