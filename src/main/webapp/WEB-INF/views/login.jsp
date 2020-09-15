@@ -8,7 +8,7 @@
 
 <h4 style="color:red">${errMsg}</h4>
 
-<form method="post" action="${pageContext.request.contextPath}/entrance">
+<form method="post" action="${pageContext.request.contextPath}/login">
     login <input type="text" name="login" required> <br />
     password <input type="password" name="pwd" required> <br />
 

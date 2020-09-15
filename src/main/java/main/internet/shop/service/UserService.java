@@ -1,6 +1,8 @@
 package main.internet.shop.service;
 
 import java.util.List;
+import java.util.Optional;
+
 import main.internet.shop.model.User;
 
 public interface UserService {
@@ -10,7 +12,7 @@ public interface UserService {
 
     List<User> getAll();
 
-    User getByLogin(String login);
+    Optional<User> getByLogin(String login);
 
     User update(User user);
 

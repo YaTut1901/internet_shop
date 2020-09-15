@@ -12,6 +12,7 @@ import main.internet.shop.model.User;
 import main.internet.shop.security.AuthenticationService;
 
 public class LoginController extends HttpServlet {
+    private static final String USER_ID = "userId";
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");
     private AuthenticationService authenticationService = (AuthenticationService)
@@ -20,7 +21,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        req.getRequestDispatcher("/WEB-INF/views/entrance.jsp")
+        req.getRequestDispatcher("/WEB-INF/views/login.jsp")
                 .forward(req, resp);
     }
 
@@ -33,10 +34,10 @@ public class LoginController extends HttpServlet {
         try {
             User user = authenticationService.login(login, password);
             HttpSession session = req.getSession();
-            session.setAttribute("userId", user.getId());
+            session.setAttribute(USER_ID, user.getId());
         } catch (AuthenticationException e) {
             req.setAttribute("errMsg", e.getMessage());
-            req.getRequestDispatcher("/WEB-INF/views/entrance.jsp").forward(req, resp);
+            req.getRequestDispatcher("/WEB-INF/views/login.jsp").forward(req, resp);
             return;
         }
         resp.sendRedirect(req.getContextPath() + "/main-menu");

@@ -1,6 +1,6 @@
 package main.internet.shop.security.impl;
 
-import java.util.NoSuchElementException;
+import java.util.Optional;
 import main.internet.shop.exception.AuthenticationException;
 import main.internet.shop.lib.Inject;
 import main.internet.shop.lib.Service;
@@ -15,15 +15,14 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     @Override
     public User login(String login, String password) throws AuthenticationException {
-        User user;
-        try {
-            user = userService.getByLogin(login);
-        } catch (NoSuchElementException e) {
+        Optional<User> optionalUser = userService.getByLogin(login);
+        if (optionalUser.isEmpty()) {
             throw new AuthenticationException("There are no user with such login!");
         }
+        User user = optionalUser.get();
         if (user.getPassword().equals(password)) {
             return user;
         }
-        return null;
+        throw new AuthenticationException("Wrong login for that user!");
     }
 }
