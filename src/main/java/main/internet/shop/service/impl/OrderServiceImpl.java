@@ -23,6 +23,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = new Order(cart.getUserId());
         order.getProducts().addAll(List.copyOf(cart.getProducts()));
         cart.getProducts().clear();
+        orderDao.create(order);
         return order;
     }
 

@@ -7,20 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import main.internet.shop.lib.Injector;
-import main.internet.shop.model.User;
-import main.internet.shop.service.UserService;
+import main.internet.shop.model.Product;
+import main.internet.shop.service.ProductService;
 
-public class GetAllUserController extends HttpServlet {
+public class GetAllProductAdminController extends HttpServlet {
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");
-    private UserService userService = (UserService)
-            injector.getInstance(UserService.class);
+    private ProductService productService = (ProductService)
+            injector.getInstance(ProductService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        List<User> allUsers = userService.getAll();
-        req.setAttribute("users", allUsers);
-        req.getRequestDispatcher("/WEB-INF/views/admin/user/all.jsp").forward(req, resp);
+        List<Product> allProducts = productService.getAll();
+        req.setAttribute("products", allProducts);
+        req.getRequestDispatcher("/WEB-INF/views/admin/products.jsp").forward(req, resp);
     }
 }

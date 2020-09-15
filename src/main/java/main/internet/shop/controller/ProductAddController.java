@@ -28,6 +28,6 @@ public class ProductAddController extends HttpServlet {
         Double price = Double.parseDouble(req.getParameter("productPrice"));
         Product product = new Product(name, price);
         productService.create(product);
-        resp.sendRedirect(req.getContextPath() + "/product/all");
+        resp.sendRedirect(req.getContextPath() + "/admin/products");
     }
 }
