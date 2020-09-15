@@ -9,7 +9,7 @@
     <input type="submit" value="Registration" />
 </form>
 Already have an account? <br /> <br />
-<form action="${pageContext.request.contextPath}/entrance">
+<form action="${pageContext.request.contextPath}/login">
     <input type="submit" value="Enter" />
 </form>
 </body>

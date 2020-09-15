@@ -84,13 +84,13 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>entrance</servlet-name>
-        <servlet-class>main.internet.shop.controller.EntranceController</servlet-class>
+        <servlet-name>login</servlet-name>
+        <servlet-class>main.internet.shop.controller.LoginController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>entrance</servlet-name>
-        <url-pattern>/entrance</url-pattern>
+        <servlet-name>login</servlet-name>
+        <url-pattern>/login</url-pattern>
     </servlet-mapping>
 
     <servlet>
@@ -192,4 +192,14 @@
         <servlet-name>AdminProductDelete</servlet-name>
         <url-pattern>/admin/product-delete</url-pattern>
     </servlet-mapping>
+
+    <filter>
+        <filter-name>authenticationFilter</filter-name>
+        <filter-class>main.internet.shop.security.filter.AuthenticationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
 </web-app>

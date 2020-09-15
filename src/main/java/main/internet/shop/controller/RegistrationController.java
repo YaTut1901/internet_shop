@@ -35,7 +35,7 @@ public class RegistrationController extends HttpServlet {
         if (password.equals(passwordConfirming)) {
             User user = userService.create(new User(name, login, password));
             shoppingCartService.create(new ShoppingCart(user.getId()));
-            resp.sendRedirect(req.getContextPath() + "/main-menu");
+            resp.sendRedirect(req.getContextPath() + "/login");
         } else {
             req.setAttribute("message", "Wrong confirming!");
             req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
