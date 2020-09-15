@@ -10,9 +10,6 @@ import main.internet.shop.service.ProductService;
 import main.internet.shop.service.ShoppingCartService;
 import main.internet.shop.service.UserService;
 
-import java.util.HashMap;
-import java.util.Map;
-
 public class Application {
     private static Injector injector = Injector.getInstance("main.internet.shop");
 

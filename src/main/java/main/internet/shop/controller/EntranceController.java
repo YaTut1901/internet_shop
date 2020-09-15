@@ -1,20 +1,21 @@
 package main.internet.shop.controller;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import main.internet.shop.exception.AuthenticationException;
 import main.internet.shop.lib.Injector;
 import main.internet.shop.model.User;
-import main.internet.shop.service.UserService;
+import main.internet.shop.security.AuthenticationService;
 
 public class EntranceController extends HttpServlet {
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");
-    private UserService userService = (UserService)
-            injector.getInstance(UserService.class);
+    private AuthenticationService authenticationService = (AuthenticationService)
+            injector.getInstance(AuthenticationService.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -28,14 +29,16 @@ public class EntranceController extends HttpServlet {
             throws ServletException, IOException {
         String login = req.getParameter("login");
         String password = req.getParameter("pwd");
+
         try {
-            User user = userService.getByLogin(login);
-            if (user.getPassword().equals(password)) {
-                resp.sendRedirect(req.getContextPath() + "/main-menu");
-            }
-        } catch (NoSuchElementException e) {
-            req.setAttribute("message", "There is no user with such login! Please register!");
-            req.getRequestDispatcher("/WEB-INF/views/registration.jsp").forward(req, resp);
+            User user = authenticationService.login(login, password);
+            HttpSession session = req.getSession();
+            session.setAttribute("userId", user.getId());
+        } catch (AuthenticationException e) {
+            req.setAttribute("errMsg", e.getMessage());
+            req.getRequestDispatcher("/WEB-INF/views/entrance.jsp").forward(req, resp);
+            return;
         }
+        resp.sendRedirect(req.getContextPath() + "/main-menu");
     }
 }
