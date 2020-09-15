@@ -85,7 +85,7 @@
 
     <servlet>
         <servlet-name>entrance</servlet-name>
-        <servlet-class>main.internet.shop.controller.EntranceController</servlet-class>
+        <servlet-class>main.internet.shop.controller.LoginController</servlet-class>
     </servlet>
 
     <servlet-mapping>

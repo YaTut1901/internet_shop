@@ -11,7 +11,7 @@ import main.internet.shop.lib.Injector;
 import main.internet.shop.model.User;
 import main.internet.shop.security.AuthenticationService;
 
-public class EntranceController extends HttpServlet {
+public class LoginController extends HttpServlet {
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");
     private AuthenticationService authenticationService = (AuthenticationService)
