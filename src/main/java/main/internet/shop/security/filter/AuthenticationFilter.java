@@ -30,14 +30,14 @@ public class AuthenticationFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         String url = request.getServletPath();
-        if (url.equals("/entrance") || url.equals("/registration") || url.equals("/")) {
+        if (url.equals("/login") || url.equals("/registration") || url.equals("/")) {
             filterChain.doFilter(request, response);
             return;
         }
 
         Long userId = (Long) request.getSession().getAttribute(USER_ID);
         if (userId == null || userService.get(userId) == null) {
-            response.sendRedirect(request.getContextPath() + "/entrance");
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
