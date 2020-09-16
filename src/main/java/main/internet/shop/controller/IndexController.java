@@ -8,14 +8,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import main.internet.shop.lib.Injector;
 import main.internet.shop.model.Product;
-import main.internet.shop.model.ShoppingCart;
 import main.internet.shop.model.User;
+import main.internet.shop.model.role.UserRole;
 import main.internet.shop.service.ProductService;
 import main.internet.shop.service.ShoppingCartService;
 import main.internet.shop.service.UserService;
 
 public class IndexController extends HttpServlet {
-    public static final Long TEMP_USER_ID = 1L;
     private static final Injector injector =
             Injector.getInstance("main.internet.shop");
     private ProductService productService = (ProductService)
@@ -31,8 +30,13 @@ public class IndexController extends HttpServlet {
         productService.create(new Product("sword", 34D));
         productService.create(new Product("spear", 45D));
         productService.create(new Product("shield", 22D));
-        userService.create(new User("test"));
-        shoppingCartService.create(new ShoppingCart(TEMP_USER_ID));
+        User admin = new User("admin", "admin", "123");
+        admin.addUserRole(UserRole.of("ADMIN"));
+        User userAdmin = new User("userAdmin", "userAdmin", "1234");
+        userAdmin.addUserRole(UserRole.of("ADMIN"));
+        userAdmin.addUserRole(UserRole.of("USER"));
+        userService.create(admin);
+        userService.create(userAdmin);
     }
 
     @Override

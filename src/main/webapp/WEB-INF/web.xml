@@ -193,6 +193,36 @@
         <url-pattern>/admin/product-delete</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>MainMenuAdmin</servlet-name>
+        <servlet-class>main.internet.shop.controller.AdminMainMenuController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>MainMenuAdmin</servlet-name>
+        <url-pattern>/admin/main-menu</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Logout</servlet-name>
+        <servlet-class>main.internet.shop.controller.LogoutController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>Logout</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>GeneralMenu</servlet-name>
+        <servlet-class>main.internet.shop.controller.GeneralMainMenuController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>GeneralMenu</servlet-name>
+        <url-pattern>/general-main-menu</url-pattern>
+    </servlet-mapping>
+
     <filter>
         <filter-name>authenticationFilter</filter-name>
         <filter-class>main.internet.shop.security.filter.AuthenticationFilter</filter-class>
@@ -200,6 +230,16 @@
 
     <filter-mapping>
         <filter-name>authenticationFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>authorisationFilter</filter-name>
+        <filter-class>main.internet.shop.security.filter.AuthorisationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>authorisationFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
 </web-app>
