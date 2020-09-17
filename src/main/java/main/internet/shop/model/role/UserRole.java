@@ -48,7 +48,7 @@ public class UserRole {
         return Objects.hash(id, roleName);
     }
 
-    enum RoleName {
+    private enum RoleName {
         USER,
         ADMIN;
     }

@@ -30,8 +30,11 @@ public class AuthorisationFilter implements Filter {
         protectedUrls = new HashMap<>();
         protectedUrls.put("/user/all", List.of(UserRole.of("ADMIN")));
         protectedUrls.put("/user/delete", List.of(UserRole.of("ADMIN")));
-        protectedUrls.put("/product/all", List.of(UserRole.of("USER")));
         protectedUrls.put("/product/add", List.of(UserRole.of("ADMIN")));
+        protectedUrls.put("/admin/delete-order", List.of(UserRole.of("ADMIN")));
+        protectedUrls.put("/admin/products", List.of(UserRole.of("ADMIN")));
+        protectedUrls.put("/admin/product-delete", List.of(UserRole.of("ADMIN")));
+        protectedUrls.put("/product/all", List.of(UserRole.of("USER")));
         protectedUrls.put("/product/buy", List.of(UserRole.of("USER")));
         protectedUrls.put("/shopping-cart/products", List.of(UserRole.of("USER")));
         protectedUrls.put("/product/success-buying", List.of(UserRole.of("USER")));
@@ -39,9 +42,6 @@ public class AuthorisationFilter implements Filter {
         protectedUrls.put("/order/user-orders", List.of(UserRole.of("USER")));
         protectedUrls.put("/order/create", List.of(UserRole.of("USER")));
         protectedUrls.put("/order/details", List.of(UserRole.of("USER")));
-        protectedUrls.put("/admin/delete-order", List.of(UserRole.of("ADMIN")));
-        protectedUrls.put("/admin/products", List.of(UserRole.of("ADMIN")));
-        protectedUrls.put("/admin/product-delete", List.of(UserRole.of("ADMIN")));
         protectedUrls.put("/main-menu", List.of(UserRole.of("USER")));
     }
 
