@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>Main menu</title>
 </head>
 <body>
 <h1>MAIN MENU</h1>
@@ -22,6 +22,9 @@
 </form>
 <form action="${pageContext.request.contextPath}/logout">
     <input type="submit" value="Logout" />
+</form>
+<form action="${pageContext.request.contextPath}/inject">
+    <input type="submit" value="Inject data" />
 </form>
 </body>
 </html>

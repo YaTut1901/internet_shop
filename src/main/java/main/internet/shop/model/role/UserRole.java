@@ -3,8 +3,8 @@ package main.internet.shop.model.role;
 import java.util.Objects;
 
 public class UserRole {
-    Long id;
-    RoleName roleName;
+    private Long id;
+    private RoleName roleName;
 
     private UserRole(RoleName roleName) {
         this.roleName = roleName;
@@ -48,7 +48,7 @@ public class UserRole {
         return Objects.hash(id, roleName);
     }
 
-    private enum RoleName {
+    public enum RoleName {
         USER,
         ADMIN;
     }

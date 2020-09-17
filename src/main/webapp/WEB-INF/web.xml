@@ -164,6 +164,16 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>InjectData</servlet-name>
+        <servlet-class>main.internet.shop.controller.InjectDataController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>InjectData</servlet-name>
+        <url-pattern>/inject</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>DeleteOrder</servlet-name>
         <servlet-class>main.internet.shop.controller.OrderDeleteController</servlet-class>
     </servlet>

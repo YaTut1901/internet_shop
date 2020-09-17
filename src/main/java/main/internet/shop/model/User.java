@@ -1,8 +1,10 @@
 package main.internet.shop.model;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 import main.internet.shop.model.role.UserRole;
 
 public class User {
@@ -29,6 +31,10 @@ public class User {
 
     public Set<UserRole> getUserRoles() {
         return userRoles;
+    }
+
+    public List<UserRole.RoleName> getUserRolesNames() {
+        return userRoles.stream().map(UserRole::getRoleName).collect(Collectors.toList());
     }
 
     public Long getId() {

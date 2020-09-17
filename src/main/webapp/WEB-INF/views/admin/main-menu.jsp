@@ -17,5 +17,8 @@
 <form action="${pageContext.request.contextPath}/logout">
     <input type="submit" value="Logout" />
 </form>
+<form action="${pageContext.request.contextPath}/inject">
+    <input type="submit" value="Inject data" />
+</form>
 </body>
 </html>
