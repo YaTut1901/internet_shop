@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import main.internet.shop.lib.Injector;
 import main.internet.shop.model.ShoppingCart;
 import main.internet.shop.model.User;
+import main.internet.shop.model.role.UserRole;
 import main.internet.shop.service.ShoppingCartService;
 import main.internet.shop.service.UserService;
 
@@ -34,6 +35,7 @@ public class RegistrationController extends HttpServlet {
         String name = req.getParameter("name");
         if (password.equals(passwordConfirming)) {
             User user = userService.create(new User(name, login, password));
+            user.addUserRole(UserRole.of("USER"));
             shoppingCartService.create(new ShoppingCart(user.getId()));
             resp.sendRedirect(req.getContextPath() + "/login");
         } else {

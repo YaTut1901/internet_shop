@@ -11,5 +11,8 @@
 <form action="${pageContext.request.contextPath}/shopping-cart/products">
     <input type="submit" value="My cart" />
 </form>
+<form action="${pageContext.request.contextPath}/logout">
+    <input type="submit" value="Logout" />
+</form>
 </body>
 </html>
