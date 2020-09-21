@@ -13,7 +13,7 @@ import main.internet.shop.exception.DataProcessingException;
 import main.internet.shop.model.Product;
 import main.internet.shop.utils.ConnectionUtils;
 
-public class ProductDaoJavaDataBaseConnectivityImpl implements ProductDao {
+public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product create(Product product) {
         String query = "INSERT INTO products (name, price) VALUES (?, ?)";
