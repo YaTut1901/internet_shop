@@ -15,21 +15,19 @@ import main.internet.shop.utils.ConnectionUtils;
 
 public class ProductDaoJavaDataBaseConnectivityImpl implements ProductDao {
     @Override
-    public Product create(Product item) {
-        String productName = item.getName();
-        Double productPrice = item.getPrice();
+    public Product create(Product product) {
         String query = "INSERT INTO products (name, price) VALUES (?, ?)";
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query,
                     Statement.RETURN_GENERATED_KEYS);
-            statement.setString(1, productName);
-            statement.setDouble(2, productPrice);
+            statement.setString(1, product.getName());
+            statement.setDouble(2, product.getPrice());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             if (resultSet.next()) {
-                item.setId(resultSet.getLong(1));
+                product.setId(resultSet.getLong(1));
             }
-            return item;
+            return product;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't connect to MySQL", e);
         }
@@ -37,7 +35,7 @@ public class ProductDaoJavaDataBaseConnectivityImpl implements ProductDao {
 
     @Override
     public Optional<Product> get(Long id) {
-        String query = "SELECT * FROM products WHERE id = ?";
+        String query = "SELECT * FROM products WHERE id = ? && deleted = false";
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
@@ -47,17 +45,16 @@ public class ProductDaoJavaDataBaseConnectivityImpl implements ProductDao {
                         resultSet.getDouble("price"));
                 product.setId(id);
                 return Optional.of(product);
-            } else {
-                return Optional.empty();
             }
+            return Optional.empty();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't connect to MySQL", e);
+            throw new DataProcessingException("Can't get from MySQL product with id = " + id, e);
         }
     }
 
     @Override
     public List<Product> getAll() {
-        String query = "SELECT * FROM products WHERE deleted = 0";
+        String query = "SELECT * FROM products WHERE deleted = false";
         List<Product> allProducts = new ArrayList<>();
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
@@ -72,15 +69,15 @@ public class ProductDaoJavaDataBaseConnectivityImpl implements ProductDao {
     }
 
     @Override
-    public Product update(Product item) {
-        String query = "UPDATE products SET name = ?, price = ? WHERE id = ?";
+    public Product update(Product product) {
+        String query = "UPDATE products SET name = ?, price = ? WHERE id = ? && deleted = false";
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
-            statement.setString(1, item.getName());
-            statement.setDouble(2, item.getPrice());
-            statement.setLong(3, item.getId());
+            statement.setString(1, product.getName());
+            statement.setDouble(2, product.getPrice());
+            statement.setLong(3, product.getId());
             statement.executeUpdate();
-            return item;
+            return product;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't connect to MySQL", e);
         }
@@ -92,16 +89,15 @@ public class ProductDaoJavaDataBaseConnectivityImpl implements ProductDao {
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
-            statement.executeUpdate();
-            return true;
+            return statement.executeUpdate() == 1;
         } catch (SQLException e) {
             throw new DataProcessingException("Can't connect to MySQL", e);
         }
     }
 
     @Override
-    public boolean delete(Product item) {
-        return deleteById(item.getId());
+    public boolean delete(Product product) {
+        return deleteById(product.getId());
     }
 
     private Product extractProductFromResultSet(ResultSet resultSet) throws SQLException {
