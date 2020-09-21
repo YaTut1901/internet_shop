@@ -29,7 +29,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return product;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't connect to MySQL", e);
+            throw new DataProcessingException("Can't create new product", e);
         }
     }
 
@@ -48,7 +48,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get from MySQL product with id = " + id, e);
+            throw new DataProcessingException("Can't get product with id = " + id + " from DB", e);
         }
     }
 
@@ -64,7 +64,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return allProducts;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't connect to MySQL", e);
+            throw new DataProcessingException("Can't get products from DB", e);
         }
     }
 
@@ -79,7 +79,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.executeUpdate();
             return product;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't connect to MySQL", e);
+            throw new DataProcessingException("Can't update product with id = " + product.getId(), e);
         }
     }
 
@@ -91,7 +91,7 @@ public class ProductDaoJdbcImpl implements ProductDao {
             statement.setLong(1, id);
             return statement.executeUpdate() == 1;
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't connect to MySQL", e);
+            throw new DataProcessingException("Can't delete product with id = " + id + " from DB", e);
         }
     }
 
