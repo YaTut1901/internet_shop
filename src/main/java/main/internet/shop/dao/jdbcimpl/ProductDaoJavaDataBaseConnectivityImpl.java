@@ -88,7 +88,7 @@ public class ProductDaoJavaDataBaseConnectivityImpl implements ProductDao {
 
     @Override
     public boolean deleteById(Long id) {
-        String query = "UPDATE products SET deleted = 1 WHERE id = ?";
+        String query = "UPDATE products SET deleted = true WHERE id = ?";
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
