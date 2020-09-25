@@ -24,6 +24,7 @@ public class CreateOrderController extends HttpServlet {
         Long userId = (Long) request.getSession().getAttribute(USER_ID);
         ShoppingCart cart = shoppingCartService.getByUserId(userId);
         orderService.completeOrder(cart);
+        shoppingCartService.clear(cart);
         request.setAttribute("message", "Order successfully created!");
         request.getRequestDispatcher("/WEB-INF/views/shopping-cart/products.jsp")
                 .forward(request, response);

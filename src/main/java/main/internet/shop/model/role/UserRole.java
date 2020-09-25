@@ -1,17 +1,30 @@
 package main.internet.shop.model.role;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class UserRole {
+    private static Map<String, Long> idMap;
     private Long id;
     private RoleName roleName;
 
-    private UserRole(RoleName roleName) {
+    private UserRole(RoleName roleName, Long id) {
         this.roleName = roleName;
+        this.id = id;
+    }
+
+    public UserRole() {
+        idMap = new HashMap<>();
+        idMap.put("ADMIN", 1L);
+        idMap.put("USER", 2L);
     }
 
     public static UserRole of(String role) {
-        return new UserRole(RoleName.valueOf(role));
+        UserRole userRole = new UserRole();
+        userRole.setRoleName(RoleName.valueOf(role));
+        userRole.setId(idMap.get(role));
+        return userRole;
     }
 
     public Long getId() {
@@ -51,6 +64,14 @@ public class UserRole {
     public enum RoleName {
         USER,
         ADMIN;
+    }
+
+    @Override
+    public String toString() {
+        return "UserRole{"
+                + "id=" + id
+                + ", roleName=" + roleName
+                + '}';
     }
 }
 

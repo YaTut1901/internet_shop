@@ -14,6 +14,10 @@ public class User {
     private String password;
     private Set<UserRole> userRoles;
 
+    public User() {
+        userRoles = new HashSet<>();
+    }
+
     public User(String name, String login, String password) {
         userRoles = new HashSet<>();
         this.name = name;
@@ -31,6 +35,10 @@ public class User {
 
     public Set<UserRole> getUserRoles() {
         return userRoles;
+    }
+
+    public void setUserRoles(Set<UserRole> userRoles) {
+        this.userRoles = userRoles;
     }
 
     public List<UserRole.RoleName> getUserRolesNames() {
@@ -96,6 +104,7 @@ public class User {
                 + ", name='" + name + '\''
                 + ", login='" + login + '\''
                 + ", password='" + password + '\''
+                + ", userRoles=" + userRoles
                 + '}';
     }
 }

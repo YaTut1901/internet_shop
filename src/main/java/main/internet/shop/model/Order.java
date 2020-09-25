@@ -14,6 +14,10 @@ public class Order {
         this.userId = userId;
     }
 
+    public Order() {
+        products = new ArrayList<>();
+    }
+
     public Long getId() {
         return id;
     }

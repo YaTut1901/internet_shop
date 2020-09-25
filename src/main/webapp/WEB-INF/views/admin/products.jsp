@@ -33,5 +33,8 @@
 <form method="get" action="${pageContext.request.contextPath}/product/add">
     <button type="submit">Add product</button>
 </form>
+<form method="get" action="${pageContext.request.contextPath}/admin/main-menu">
+    <button type="submit">Main menu</button>
+</form>
 </body>
 </html>

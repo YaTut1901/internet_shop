@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.Optional;
 import main.internet.shop.dao.ProductDao;
 import main.internet.shop.exception.DataProcessingException;
+import main.internet.shop.lib.Dao;
 import main.internet.shop.model.Product;
 import main.internet.shop.utils.ConnectionUtils;
 
+@Dao
 public class ProductDaoJdbcImpl implements ProductDao {
     @Override
     public Product create(Product product) {
@@ -48,7 +50,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
             }
             return Optional.empty();
         } catch (SQLException e) {
-            throw new DataProcessingException("Can't get product with id = " + id + " from DB", e);
+            throw new DataProcessingException("Can't get product with id = "
+                    + id + " from DB", e);
         }
     }
 
@@ -70,7 +73,8 @@ public class ProductDaoJdbcImpl implements ProductDao {
 
     @Override
     public Product update(Product product) {
-        String query = "UPDATE products SET name = ?, price = ? WHERE id = ? && deleted = false";
+        String query = "UPDATE products SET name = ?, price = ? "
+                + "WHERE id = ? && deleted = false";
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setString(1, product.getName());

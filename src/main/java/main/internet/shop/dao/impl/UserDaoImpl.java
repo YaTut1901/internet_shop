@@ -5,11 +5,9 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import main.internet.shop.dao.UserDao;
-import main.internet.shop.lib.Dao;
 import main.internet.shop.model.User;
 import main.internet.shop.storage.Storage;
 
-@Dao
 public class UserDaoImpl implements UserDao {
     @Override
     public User create(User user) {
