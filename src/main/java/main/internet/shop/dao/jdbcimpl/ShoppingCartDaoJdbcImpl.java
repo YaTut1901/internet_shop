@@ -20,14 +20,15 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public Optional<ShoppingCart> getByUserId(Long userId) {
         String query = "SELECT * FROM shopping_carts WHERE user_id = ?;";
-        try (Connection connection = ConnectionUtils.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectionUtils.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, userId);
             ResultSet resultSet = statement.executeQuery();
             if (!resultSet.next()) {
                 return Optional.empty();
             }
             ShoppingCart shoppingCart = extractShoppingCartFromResultSet(resultSet);
+            statement.close();
             shoppingCart.setProducts(extractProductsFromShoppingCart(shoppingCart.getId()));
             return Optional.of(shoppingCart);
         } catch (SQLException e) {

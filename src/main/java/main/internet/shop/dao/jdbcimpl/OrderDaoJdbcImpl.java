@@ -58,14 +58,15 @@ public class OrderDaoJdbcImpl implements OrderDao {
     @Override
     public Optional<Order> get(Long id) {
         String query = "SELECT * FROM orders WHERE id = ?";
-        try (Connection connection = ConnectionUtils.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = ConnectionUtils.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
             if (!resultSet.next()) {
                 return Optional.empty();
             }
             Order order = extractOrderFromResultSet(resultSet);
+            statement.close();
             order.setProducts(extractProductsFromOrder(order.getId()));
             return Optional.of(order);
         } catch (SQLException e) {
