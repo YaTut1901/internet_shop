@@ -6,6 +6,7 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 import main.internet.shop.model.role.UserRole;
+import main.internet.shop.utils.HashUtil;
 
 public class User {
     private Long id;
@@ -13,9 +14,11 @@ public class User {
     private String login;
     private String password;
     private Set<UserRole> userRoles;
+    private byte[] salt;
 
     public User() {
         userRoles = new HashSet<>();
+        salt = HashUtil.generateSalt();
     }
 
     public User(String name, String login, String password) {
@@ -75,6 +78,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public byte[] getSalt() {
+        return salt;
+    }
+
+    public void setSalt(byte[] salt) {
+        this.salt = salt;
     }
 
     @Override
