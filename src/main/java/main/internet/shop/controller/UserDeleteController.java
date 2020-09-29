@@ -23,6 +23,6 @@ public class UserDeleteController extends HttpServlet {
         Long id = Long.parseLong(req.getParameter("id"));
         userService.delete(id);
         shoppingCartService.deleteById(id);
-        resp.sendRedirect(req.getContextPath() + "/admin/user/all");
+        resp.sendRedirect(req.getContextPath() + "/user/all");
     }
 }

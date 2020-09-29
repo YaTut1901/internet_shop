@@ -25,7 +25,13 @@ public class ProductAddController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         String name = req.getParameter("productName");
-        Double price = Double.parseDouble(req.getParameter("productPrice"));
+        String strPrice = req.getParameter("productPrice");
+        if (name.isEmpty() || strPrice.isEmpty()) {
+            req.setAttribute("errMsg", "Insert correct data!");
+            req.getRequestDispatcher("/WEB-INF/views/product/add.jsp").forward(req, resp);
+            return;
+        }
+        Double price = Double.parseDouble(strPrice);
         Product product = new Product(name, price);
         productService.create(product);
         resp.sendRedirect(req.getContextPath() + "/admin/products");

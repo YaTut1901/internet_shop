@@ -1,8 +1,9 @@
 package main.internet.shop.dao;
 
+import java.util.Optional;
 import main.internet.shop.model.ShoppingCart;
 
 public interface ShoppingCartDao extends GenericDao<ShoppingCart, Long> {
 
-    ShoppingCart getByUserId(Long userId);
+    Optional<ShoppingCart> getByUserId(Long userId);
 }

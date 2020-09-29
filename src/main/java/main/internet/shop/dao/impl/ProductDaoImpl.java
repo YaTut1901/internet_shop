@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import main.internet.shop.dao.ProductDao;
-import main.internet.shop.lib.Dao;
 import main.internet.shop.model.Product;
 import main.internet.shop.storage.Storage;
 
-@Dao
 public class ProductDaoImpl implements ProductDao {
 
     @Override

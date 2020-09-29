@@ -5,11 +5,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import main.internet.shop.dao.OrderDao;
-import main.internet.shop.lib.Dao;
 import main.internet.shop.model.Order;
 import main.internet.shop.storage.Storage;
 
-@Dao
 public class OrderDaoImpl implements OrderDao {
     @Override
     public Order create(Order order) {

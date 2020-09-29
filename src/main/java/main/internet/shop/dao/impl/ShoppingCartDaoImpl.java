@@ -4,11 +4,9 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.IntStream;
 import main.internet.shop.dao.ShoppingCartDao;
-import main.internet.shop.lib.Dao;
 import main.internet.shop.model.ShoppingCart;
 import main.internet.shop.storage.Storage;
 
-@Dao
 public class ShoppingCartDaoImpl implements ShoppingCartDao {
     @Override
     public ShoppingCart create(ShoppingCart cart) {
@@ -29,11 +27,10 @@ public class ShoppingCartDaoImpl implements ShoppingCartDao {
     }
 
     @Override
-    public ShoppingCart getByUserId(Long userId) {
+    public Optional<ShoppingCart> getByUserId(Long userId) {
         return Storage.carts.stream()
                 .filter(cart -> cart.getUserId().equals(userId))
-                .findFirst()
-                .orElseThrow();
+                .findFirst();
     }
 
     @Override
