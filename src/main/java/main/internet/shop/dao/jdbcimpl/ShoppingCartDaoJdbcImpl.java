@@ -19,22 +19,7 @@ import main.internet.shop.utils.ConnectionUtils;
 public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
     @Override
     public Optional<ShoppingCart> getByUserId(Long userId) {
-        String query = "SELECT * FROM shopping_carts WHERE user_id = ?;";
-        try (Connection connection = ConnectionUtils.getConnection()) {
-            PreparedStatement statement = connection.prepareStatement(query);
-            statement.setLong(1, userId);
-            ResultSet resultSet = statement.executeQuery();
-            if (!resultSet.next()) {
-                return Optional.empty();
-            }
-            ShoppingCart shoppingCart = extractShoppingCartFromResultSet(resultSet);
-            statement.close();
-            shoppingCart.setProducts(extractProductsFromShoppingCart(shoppingCart.getId()));
-            return Optional.of(shoppingCart);
-        } catch (SQLException e) {
-            throw new DataProcessingException("Can not get shopping cart from DB with user ID = "
-                    + userId, e);
-        }
+        return generalGet(userId, "user_id");
     }
 
     @Override
@@ -58,21 +43,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public Optional<ShoppingCart> get(Long id) {
-        String query = "SELECT * FROM shopping_carts WHERE id = ?;";
-        try (Connection connection = ConnectionUtils.getConnection();
-                PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setLong(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (!resultSet.next()) {
-                return Optional.empty();
-            }
-            ShoppingCart shoppingCart = extractShoppingCartFromResultSet(resultSet);
-            shoppingCart.setProducts(extractProductsFromShoppingCart(shoppingCart.getId()));
-            return Optional.of(shoppingCart);
-        } catch (SQLException e) {
-            throw new DataProcessingException("Can't get shopping cart from DB with Id = "
-                    + id, e);
-        }
+        return generalGet(id, "id");
     }
 
     @Override
@@ -112,28 +83,12 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
 
     @Override
     public boolean deleteById(Long id) {
-        String queryForCart = "DELETE FROM shopping_carts WHERE id = ?";
-        String queryForCartProducts = "DELETE FROM shopping_carts_products WHERE cart_id = ?";
-        try (Connection connection = ConnectionUtils.getConnection();
-                PreparedStatement statementForCart = connection.prepareStatement(queryForCart);
-                PreparedStatement statementForCartProducts =
-                        connection.prepareStatement(queryForCartProducts)) {
-            statementForCart.setLong(1, id);
-            if (statementForCart.executeUpdate() == 0) {
-                return false;
-            }
-            statementForCartProducts.setLong(1, id);
-            statementForCartProducts.executeUpdate();
-            return true;
-        } catch (SQLException e) {
-            throw new DataProcessingException("Can't delete shopping cart with id = "
-                    + id, e);
-        }
+        return generalDelete(id);
     }
 
     @Override
     public boolean delete(ShoppingCart cart) {
-        return deleteById(cart.getId());
+        return generalDelete(cart.getId());
     }
 
     private ShoppingCart extractShoppingCartFromResultSet(ResultSet resultSet)
@@ -179,6 +134,45 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         } catch (SQLException e) {
             throw new DataProcessingException("Can't update shopping cart with id = "
                     + shoppingCart.getId(), e);
+        }
+    }
+
+    private boolean generalDelete(Long id) {
+        String queryForCart = "DELETE FROM shopping_carts WHERE id = ?";
+        String queryForCartProducts = "DELETE FROM shopping_carts_products WHERE cart_id = ?";
+        try (Connection connection = ConnectionUtils.getConnection();
+             PreparedStatement statementForCart = connection.prepareStatement(queryForCart);
+             PreparedStatement statementForCartProducts =
+                     connection.prepareStatement(queryForCartProducts)) {
+            statementForCart.setLong(1, id);
+            if (statementForCart.executeUpdate() == 0) {
+                return false;
+            }
+            statementForCartProducts.setLong(1, id);
+            statementForCartProducts.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can't delete shopping cart with id = "
+                    + id, e);
+        }
+    }
+
+    private Optional<ShoppingCart> generalGet(Long parameter, String queryArg) {
+        String query = "SELECT * FROM shopping_carts WHERE " + queryArg + " = ?;";
+        try (Connection connection = ConnectionUtils.getConnection()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            statement.setLong(1, parameter);
+            ResultSet resultSet = statement.executeQuery();
+            if (!resultSet.next()) {
+                return Optional.empty();
+            }
+            ShoppingCart shoppingCart = extractShoppingCartFromResultSet(resultSet);
+            statement.close();
+            shoppingCart.setProducts(extractProductsFromShoppingCart(shoppingCart.getId()));
+            return Optional.of(shoppingCart);
+        } catch (SQLException e) {
+            throw new DataProcessingException("Can not get shopping cart from DB with "+ queryArg +" = "
+                    + parameter, e);
         }
     }
 
