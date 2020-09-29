@@ -163,11 +163,11 @@ public class UserDaoJdbcImpl implements UserDao {
 
     private User extractUserFromResultSet(ResultSet resultSet) throws SQLException {
         User user = new User();
-        user.setId(resultSet.getLong("users.id"));
-        user.setLogin(resultSet.getString("users.login"));
-        user.setName(resultSet.getString("users.name"));
-        user.setPassword(resultSet.getString("users.password"));
-        user.setSalt(resultSet.getBytes("users.salt"));
+        user.setId(resultSet.getLong("id"));
+        user.setLogin(resultSet.getString("login"));
+        user.setName(resultSet.getString("name"));
+        user.setPassword(resultSet.getString("password"));
+        user.setSalt(resultSet.getBytes("salt"));
         return user;
     }
 
