@@ -60,7 +60,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             throw new DataProcessingException("Can not get shopping carts from DB", e);
         }
         for (ShoppingCart shoppingCart : shoppingCarts) {
-            shoppingCart.setProducts(extractProductsFromShoppingCart(shoppingCart.getId()));
+            shoppingCart.setProducts(getShoppingCartProducts(shoppingCart.getId()));
         }
         return shoppingCarts;
     }
@@ -98,7 +98,7 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         return cart;
     }
 
-    private List<Product> extractProductsFromShoppingCart(Long cartId) {
+    private List<Product> getShoppingCartProducts(Long cartId) {
         String query = "SELECT * FROM products INNER JOIN shopping_carts_products "
                 + "ON products.id = shopping_carts_products.product_id "
                 + "WHERE shopping_carts_products.cart_id = ?;";
@@ -141,9 +141,9 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
         String queryForCart = "DELETE FROM shopping_carts WHERE id = ?";
         String queryForCartProducts = "DELETE FROM shopping_carts_products WHERE cart_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
-             PreparedStatement statementForCart = connection.prepareStatement(queryForCart);
-             PreparedStatement statementForCartProducts =
-                     connection.prepareStatement(queryForCartProducts)) {
+                PreparedStatement statementForCart = connection.prepareStatement(queryForCart);
+                PreparedStatement statementForCartProducts =
+                        connection.prepareStatement(queryForCartProducts)) {
             statementForCart.setLong(1, id);
             if (statementForCart.executeUpdate() == 0) {
                 return false;
@@ -168,10 +168,11 @@ public class ShoppingCartDaoJdbcImpl implements ShoppingCartDao {
             }
             ShoppingCart shoppingCart = extractShoppingCartFromResultSet(resultSet);
             statement.close();
-            shoppingCart.setProducts(extractProductsFromShoppingCart(shoppingCart.getId()));
+            shoppingCart.setProducts(getShoppingCartProducts(shoppingCart.getId()));
             return Optional.of(shoppingCart);
         } catch (SQLException e) {
-            throw new DataProcessingException("Can not get shopping cart from DB with "+ queryArg +" = "
+            throw new DataProcessingException("Can not get shopping cart from DB with "
+                    + queryArg + " = "
                     + parameter, e);
         }
     }

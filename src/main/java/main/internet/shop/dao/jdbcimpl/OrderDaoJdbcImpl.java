@@ -32,7 +32,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
                     + userId, e);
         }
         for (Order order : orders) {
-            order.setProducts(extractProductsFromOrder(order.getId()));
+            order.setProducts(getOrderProducts(order.getId()));
         }
         return orders;
     }
@@ -57,7 +57,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
 
     @Override
     public Optional<Order> get(Long id) {
-        String query = "SELECT * FROM orders WHERE id = ?";
+        String query = "SELECT * FROM orders WHERE id = ? AND deleted = false";
         try (Connection connection = ConnectionUtils.getConnection()) {
             PreparedStatement statement = connection.prepareStatement(query);
             statement.setLong(1, id);
@@ -67,7 +67,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             }
             Order order = extractOrderFromResultSet(resultSet);
             statement.close();
-            order.setProducts(extractProductsFromOrder(order.getId()));
+            order.setProducts(getOrderProducts(order.getId()));
             return Optional.of(order);
         } catch (SQLException e) {
             throw new DataProcessingException("Can't' get order from DB with Id = " + id, e);
@@ -88,7 +88,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
             throw new DataProcessingException("Can't get orders from DB", e);
         }
         for (Order order : orders) {
-            order.setProducts(extractProductsFromOrder(order.getId()));
+            order.setProducts(getOrderProducts(order.getId()));
         }
         return orders;
     }
@@ -130,7 +130,7 @@ public class OrderDaoJdbcImpl implements OrderDao {
         return order;
     }
 
-    private List<Product> extractProductsFromOrder(Long id) {
+    private List<Product> getOrderProducts(Long id) {
         String query = "SELECT * FROM products INNER JOIN orders_products "
                 + "ON products.id = orders_products.product_id WHERE orders_products.order_id = ?";
         try (Connection connection = ConnectionUtils.getConnection();
