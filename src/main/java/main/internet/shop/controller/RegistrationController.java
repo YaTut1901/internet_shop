@@ -11,7 +11,6 @@ import main.internet.shop.model.User;
 import main.internet.shop.model.role.UserRole;
 import main.internet.shop.service.ShoppingCartService;
 import main.internet.shop.service.UserService;
-import main.internet.shop.utils.HashUtil;
 
 public class RegistrationController extends HttpServlet {
     private static final Injector injector =
@@ -38,7 +37,7 @@ public class RegistrationController extends HttpServlet {
             User user = new User();
             user.setLogin(login);
             user.setName(name);
-            user.setPassword(HashUtil.hashPassword(password, user.getSalt()));
+            user.setPassword(password);
             user.addUserRole(UserRole.of("USER"));
             user = userService.create(user);
             shoppingCartService.create(new ShoppingCart(user.getId()));
