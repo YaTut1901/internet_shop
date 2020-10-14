@@ -34,10 +34,12 @@ public class RegistrationController extends HttpServlet {
         String passwordConfirming = req.getParameter("pwd_confirm");
         String name = req.getParameter("name");
         if (password.equals(passwordConfirming)) {
-            User user = new User(name, login, password);
+            User user = new User();
+            user.setLogin(login);
+            user.setName(name);
+            user.setPassword(password);
             user.addUserRole(UserRole.of("USER"));
             user = userService.create(user);
-            user.addUserRole(UserRole.of("USER"));
             shoppingCartService.create(new ShoppingCart(user.getId()));
             resp.sendRedirect(req.getContextPath() + "/login");
         } else {
