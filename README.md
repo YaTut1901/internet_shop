@@ -23,8 +23,8 @@ Technologies used:
 * [PostgreSQL 12](https://www.postgresql.org/download/)
 
 Additionally configure TomCat: 
-* Add artifact
-* Add Java SDK 11
+* Add artifact 
+*    ↳   Add Java SDK 11
 
 ### For set up DB:
 * Use file src/main/resources/init_db.sql to create the DataBase all the tables required by this app.
